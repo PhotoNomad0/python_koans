@@ -23,3 +23,4 @@ class AboutTriangleProject2(Koan):
         # The sum of any two sides should be greater than the third one
         self.assertRaises(TriangleError, triangle, 1, 1, 3)
         self.assertRaises(TriangleError, triangle, 2, 5, 2)
+        self.assertRaises(TriangleError, triangle, 2, 2, 5)
