@@ -33,9 +33,41 @@ from runner.koan import *
 #
 # Your goal is to write the score method.
 
+def true_count(list):
+    count = 0
+    for item in list:
+        if item:
+            count += 1
+    return count
+
+def match_count(dice, match):
+    matches = [ (die == match) for die in dice]
+    matchCount = true_count(matches)
+    return matchCount
+
 def score(dice):
-    # You need to write this method
-    pass
+    total = 0
+    if len(dice) == 0:
+        return 0
+
+    dieValues = range(1,7)
+    matches = [ match_count(dice, die) for die in dieValues ]
+    for i in dieValues:
+        count = matches[i-1]
+        if(count >= 3):
+            if i == 1:
+                total += 1000
+            else:
+                total += i * 100
+
+            matches[i-1] = count - 3 # remove counted items
+
+    ones = matches[0]
+    total += ones * 100
+    fives = matches[4]
+    total += fives * 50
+    return total
+
 
 
 class AboutScoringProject(Koan):
